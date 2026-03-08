@@ -1,0 +1,29 @@
+*{
+    font-family: "Poppins", sans-serif;
+}
+.font-bangla{
+   font-family: "Hind Siliguri", sans-serif;
+}
+
+/* FAQ Title Font */
+h2 {
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Accordion Styling */
+.collapse-title {
+    color: #1f2937; /* Dark Gray */
+}
+
+.collapse-plus .collapse-title:after {
+    color: #9ca3af; /* Arrow color */
+}
+
+/* Footer Alignment */
+footer {
+    font-family: 'Inter', sans-serif;
+}
+
+.font-bangla {
+    font-family: 'Hind Siliguri', sans-serif;
+}
