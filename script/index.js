@@ -94,17 +94,22 @@ const renderCards = (words) => {
 
 // ফোনের জন্য এই ফাংশনটি আপডেট করা হয়েছে
 function pronounceWord(word) {
-    // আগের আওয়াজ থাকলে তা বন্ধ করে নতুন আওয়াজ শুরু করবে
-    window.speechSynthesis.cancel();
-
-    const utterance = new SpeechSynthesisUtterance(word);
-    utterance.lang = "en-US";
-    utterance.rate = 0.8; // উচ্চারণ বোঝার জন্য একটু স্লো রাখা হয়েছে
-    utterance.pitch = 1;
-    utterance.volume = 1;
-
-    // ফোনে সাউন্ড নিশ্চিত করতে সরাসরি প্লে করা হচ্ছে
-    window.speechSynthesis.speak(utterance);
+    if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel(); 
+        
+        const utterance = new SpeechSynthesisUtterance(word);
+        utterance.lang = "en-US";
+        
+    
+        window.speechSynthesis.speak(utterance);
+        
+       
+        utterance.onerror = (e) => {
+            alert("আপনার ফোনের স্পিচ ইঞ্জিনে সমস্যা আছে।");
+        };
+    } else {
+        alert("আপনার ব্রাউজারটি সাউন্ড সাপোর্ট করছে না।");
+    }
 }
 
 async function showDetails(id) {
