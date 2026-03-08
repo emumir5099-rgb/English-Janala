@@ -94,22 +94,29 @@ const renderCards = (words) => {
 
 // ফোনের জন্য এই ফাংশনটি আপডেট করা হয়েছে
 function pronounceWord(word) {
-    if ('speechSynthesis' in window) {
-        window.speechSynthesis.cancel(); 
-        
-        const utterance = new SpeechSynthesisUtterance(word);
-        utterance.lang = "en-US";
-        
-    
-        window.speechSynthesis.speak(utterance);
-        
-       
-        utterance.onerror = (e) => {
-            alert("আপনার ফোনের স্পিচ ইঞ্জিনে সমস্যা আছে।");
-        };
-    } else {
-        alert("আপনার ব্রাউজারটি সাউন্ড সাপোর্ট করছে না।");
+    // ১. আগের কোনো অডিও চলতে থাকলে তা বন্ধ করবে
+    if (window.currentAudio) {
+        window.currentAudio.pause();
     }
+
+    // ২. গুগল ট্রান্সলেটের অডিও লিঙ্ক তৈরি (এটি সব ব্রাউজারে কাজ করে)
+    const audioUrl = `https://translate.google.com/translate_tts?ie=UTF-8&q=${encodeURIComponent(word)}&tl=en&client=tw-ob`;
+    
+    // ৩. নতুন অডিও প্লেয়ার তৈরি
+    const audio = new Audio(audioUrl);
+    window.currentAudio = audio; // গ্লোবাল ভেরিয়েবলে সেভ রাখা হলো যাতে পরে বন্ধ করা যায়
+
+    // ৪. অডিও প্লে করা
+    audio.play().catch(error => {
+        console.log("সাউন্ড প্লে হতে বাধা দিচ্ছে ব্রাউজার:", error);
+        // যদি ব্রাউজার আটকে দেয়, তবে একবার স্ক্রিনে ক্লিক করতে বলবে
+        Swal.fire({
+            title: 'সাউন্ড চালু করুন',
+            text: 'ফোনে সাউন্ড শুনতে একবার স্ক্রিনে টাচ করুন।',
+            icon: 'info',
+            confirmButtonText: 'OK'
+        });
+    });
 }
 
 async function showDetails(id) {
