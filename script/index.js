@@ -12,7 +12,7 @@ const loadLevels = async () => {
         if (data.status && data.data) {
             displayLessons(data.data);
         } else {
-            lessonContainer.innerHTML = `<p class="text-error">ডাটা পাওয়া যায়নি!</p>`;
+            lessonContainer.innerHTML = `<p class="text-error">ডাটা পাওয়া যায়নি!</p>`;
         }
     } catch (err) {
         console.error("Fetch Error:", err);
@@ -28,7 +28,6 @@ const displayLessons = (lessons) => {
        
         btn.className = "btn btn-outline border-indigo-500 text-indigo-600 hover:bg-indigo-600 hover:text-white gap-2 lesson-btn transition-all duration-300 rounded-xl px-6 py-2 shadow-sm";
         
-        
         const title = lesson.level_name || `Lesson ${lesson.level_no}`;
         
         btn.innerHTML = `
@@ -37,13 +36,10 @@ const displayLessons = (lessons) => {
         `;
 
         btn.onclick = () => {
-            
             document.querySelectorAll('.lesson-btn').forEach(b => {
                 b.classList.remove('bg-indigo-600', 'text-white');
             });
             btn.classList.add('bg-indigo-600', 'text-white');
-            
-            
             loadWords(lesson.level_no);
         };
         lessonContainer.appendChild(btn);
@@ -58,7 +54,7 @@ const loadWords = async (levelNo) => {
         const data = await res.json();
         renderCards(data.data);
     } catch (err) {
-        displayBox.innerHTML = `<h3 class="text-xl text-red-400 font-bangla">এই লেসনে কোনো শব্দ পাওয়া যায়নি।</h3>`;
+        displayBox.innerHTML = `<h3 class="text-xl text-red-400 font-bangla">এই লেসনে কোনো শব্দ পাওয়া যায়নি।</h3>`;
     }
 };
 
@@ -96,10 +92,18 @@ const renderCards = (words) => {
     });
 };
 
-
+// ফোনের জন্য এই ফাংশনটি আপডেট করা হয়েছে
 function pronounceWord(word) {
+    // আগের আওয়াজ থাকলে তা বন্ধ করে নতুন আওয়াজ শুরু করবে
+    window.speechSynthesis.cancel();
+
     const utterance = new SpeechSynthesisUtterance(word);
     utterance.lang = "en-US";
+    utterance.rate = 0.8; // উচ্চারণ বোঝার জন্য একটু স্লো রাখা হয়েছে
+    utterance.pitch = 1;
+    utterance.volume = 1;
+
+    // ফোনে সাউন্ড নিশ্চিত করতে সরাসরি প্লে করা হচ্ছে
     window.speechSynthesis.speak(utterance);
 }
 
@@ -122,12 +126,11 @@ function saveWord(word) {
     if (!savedWords.includes(word)) {
         savedWords.push(word);
         localStorage.setItem('saved_vocab', JSON.stringify(savedWords));
-        alert(`"${word}" সেভ করা হয়েছে!`);
+        alert(`"${word}" সেভ করা হয়েছে!`);
     } else {
         alert("এটি আগেই সেভ করা আছে।");
     }
 }
-
 
 searchInput.addEventListener('input', async (e) => {
     const val = e.target.value.toLowerCase();
