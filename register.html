@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - English Janala</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Hind+Siliguri:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    
+    <style>
+        body { font-family: 'Poppins', sans-serif; }
+        .font-bangla { font-family: 'Hind Siliguri', sans-serif; }
+    </style>
+</head>
+<body class="bg-slate-50 min-h-screen flex flex-col justify-center items-center p-4">
+
+    <div class="bg-white w-full max-w-md p-8 rounded-3xl shadow-xl border border-gray-100 my-10">
+        
+        <div class="text-center mb-6">
+            <div class="flex justify-center items-center gap-2 text-3xl font-bold mb-2">
+                <span class="text-gray-800">English</span>
+                <img src="https://img.icons8.com/color/48/windows-10.png" class="w-8 h-8" alt="logo">
+                <span class="font-bangla text-gray-800">জানালা</span>
+            </div>
+            <p class="text-gray-400 text-sm">নতুন একাউন্ট তৈরি করুন</p>
+        </div>
+
+        <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">Create Your Account</h2>
+
+        <form id="register-form" class="space-y-4">
+            <div class="form-control">
+                <label class="label"><span class="label-text font-semibold">Full Name</span></label>
+                <div class="relative">
+                    <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-400">
+                        <i class="fa-solid fa-user"></i>
+                    </span>
+                    <input type="text" placeholder="Enter Your Full Name Here" class="input input-bordered w-full pl-10 rounded-xl focus:border-indigo-500 outline-none" required />
+                </div>
+            </div>
+
+            <div class="form-control">
+                <label class="label"><span class="label-text font-semibold">Email Address</span></label>
+                <div class="relative">
+                    <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-400">
+                        <i class="fa-solid fa-envelope"></i>
+                    </span>
+                    <input type="email" placeholder="Enter Your Email Here" class="input input-bordered w-full pl-10 rounded-xl focus:border-indigo-500 outline-none" required />
+                </div>
+            </div>
+
+            <div class="form-control">
+                <label class="label"><span class="label-text font-semibold">Password</span></label>
+                <div class="relative">
+                    <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-400">
+                        <i class="fa-solid fa-lock"></i>
+                    </span>
+                    <input type="password" placeholder="Create a strong password" class="input input-bordered w-full pl-10 rounded-xl focus:border-indigo-500 outline-none" required />
+                </div>
+            </div>
+
+            <div class="form-control">
+                <label class="label"><span class="label-text font-semibold">Confirm Password</span></label>
+                <div class="relative">
+                    <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-400">
+                        <i class="fa-solid fa-circle-check"></i>
+                    </span>
+                    <input type="password" placeholder="Confirm your Password" class="input input-bordered w-full pl-10 rounded-xl focus:border-indigo-500 outline-none" required />
+                </div>
+            </div>
+
+            <button type="submit" class="btn bg-indigo-600 hover:bg-indigo-800 text-white w-full border-none rounded-xl text-lg mt-4 transition-all duration-300">
+                Register Account
+            </button>
+        </form>
+
+        <div class="divider text-gray-400 text-xs my-6 uppercase tracking-widest">Or Sign Up With</div>
+
+        <div class="flex gap-4">
+            <button class="btn btn-outline flex-grow rounded-xl border-gray-200 hover:bg-gray-50 hover:text-gray-800 font-medium">
+                <img src="https://img.icons8.com/color/24/google-logo.png" alt="google" class="w-5 h-5 mr-1"> Google
+            </button>
+            <button class="btn btn-outline flex-grow rounded-xl border-gray-200 hover:bg-gray-50 hover:text-gray-800 font-medium">
+                <i class="fa-brands fa-github text-lg mr-1 text-gray-800"></i> GitHub
+            </button>
+        </div>
+
+        <p class="text-center mt-8 text-gray-500 text-sm">
+            Already have an account? 
+            <a href="login.html" class="text-indigo-600 font-bold hover:underline">Login Now</a>
+        </p>
+    </div>
+
+    <p class="mb-10 text-gray-400 text-xs italic font-bangla">Developed by Emu © 2026</p>
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+    document.getElementById('register-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        Swal.fire({
+            title: 'Registration Complete!',
+            text: 'আপনার একাউন্ট সফলভাবে তৈরি হয়েছে।',
+            icon: 'success',
+            timer: 2000,
+            showConfirmButton: false
+        }).then(() => {
+            window.location.href = 'index.html';
+        });
+    });
+</script>
+
+
+</body>
+</html>
